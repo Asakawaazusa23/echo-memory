@@ -1,0 +1,13 @@
+# 回声（Echo）核心依赖（Python 3.13）
+fastembed==0.8.0
+huggingface_hub==1.21.0
+jieba==0.42.1
+numpy==2.2.6
+onnxruntime==1.25.0
+
+# 可选：bge-reranker-v2-m3 重排（CUDA 可用时自动 fp16）
+torch==2.12.1
+transformers==5.12.1
+
+# 可选：国内网络从魔搭拉模型
+# modelscope>=1.30

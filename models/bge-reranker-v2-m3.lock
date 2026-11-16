@@ -1,0 +1,10 @@
+{
+  "name": "bge-reranker-v2-m3",
+  "model_id": "BAAI/bge-reranker-v2-m3",
+  "kind": "reranker",
+  "runtime": "transformers (AutoModelForSequenceClassification)",
+  "precision": "fp16（CUDA 可用时自动加载 float16，CPU 回退 float32）",
+  "used_by": ["重排主检索候选（可选）"],
+  "fetch": "python scripts/fetch_models.py --only bge-reranker-v2-m3",
+  "sources": ["huggingface", "modelscope"]
+}

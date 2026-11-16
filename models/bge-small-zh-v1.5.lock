@@ -1,0 +1,11 @@
+{
+  "name": "bge-small-zh-v1.5",
+  "model_id": "BAAI/bge-small-zh-v1.5",
+  "kind": "embedding",
+  "runtime": "fastembed (ONNX)",
+  "dim": 512,
+  "precision": "onnx-fp32（fastembed 默认；GPU 场景无需 FP16）",
+  "used_by": ["vendor/mnemosyne 的向量索引", "echo/memory/tier_facts.py 的时间片向量"],
+  "fetch": "python scripts/fetch_models.py --only bge-small-zh-v1.5",
+  "sources": ["huggingface", "modelscope"]
+}
