@@ -175,8 +175,8 @@ class BeamMemory:
                         # 显式要求主后端时不得静默降级：否则调用方看到的是
                         # "写入成功"但数据其实落在 FTS5 兜底库，问题被掩盖。
                         raise RuntimeError(
-                            "Mnemosyne 初始化失败；MEMORY_BEAM_BACKEND=mnemosyne "
-                            "禁止回退到 FTS5"
+                            f"Mnemosyne 初始化失败（{type(exc).__name__}: {exc}）；"
+                            "MEMORY_BEAM_BACKEND=mnemosyne 禁止回退到 FTS5"
                         ) from exc
                     logger.warning(
                         "Mnemosyne init failed (%s: %s); using FTS5 fallback",
@@ -226,8 +226,8 @@ class BeamMemory:
             # 显式主后端模式下，任何运行期异常都必须暴露给调用方，
             # 不能悄悄切到 FTS5 兜底库造成"写入成功"的假象。
             raise RuntimeError(
-                f"Mnemosyne {reason} 失败；MEMORY_BEAM_BACKEND=mnemosyne "
-                "禁止回退到 FTS5"
+                f"Mnemosyne {reason} 失败（{type(exc).__name__}: {exc}）；"
+                "MEMORY_BEAM_BACKEND=mnemosyne 禁止回退到 FTS5"
             ) from exc
         logger.warning("Mnemosyne %s failed (%s: %s); degrading to FTS5 fallback",
                        reason, type(exc).__name__, exc, exc_info=True)
