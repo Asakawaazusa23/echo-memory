@@ -1,6 +1,6 @@
 # 回声（Echo）
 
-中文长期陪伴对话的**分层记忆系统**。从 NovaEcho 的 `novaecho/memory` 抽离而来，保留了完整的检索链与改过底层的三个组件（beam / hierarchical / mnemosyne）。
+中文长期陪伴对话的**分层记忆系统**。
 
 > 不是聊天机器人框架，只是记忆层：给它 `remember_turn()`，它给你 `agent_search()` / `get_roleplay_context()`。
 
@@ -87,7 +87,7 @@ stats: {'vector_search': 'on'}
 | `MEMORY_VECTOR_ENABLED` | `1` | 向量检索；关闭则只用 FTS5 |
 | `MEMORY_FACTS_ENABLED` | `1` | 时间片 / 事件 / 原文证据 |
 | `MEMORY_FACTS_EVENTS` | `1` | 事件卡通道（动作词 → 时间片原文） |
-| `MEMORY_FACTS_DUE` | `0` | 到期日历（默认关：评测里净收益为负） |
+| `MEMORY_FACTS_DUE` | `0` | 到期日历 |
 | `MEMORY_FACTS_SEGMENT_EMBEDDING_MODEL` | `BAAI/bge-small-zh-v1.5` | 时间片向量模型 |
 | `MNEMOSYNE_EMBEDDING_MODEL` | `BAAI/bge-small-en-v1.5` | Tier2 向量模型，中文建议设成 `BAAI/bge-small-zh-v1.5` |
 | `MNEMOSYNE_EMBEDDING_DIM` | 模型默认 | 与所选模型一致（bge-small-zh 为 512） |
@@ -98,7 +98,3 @@ stats: {'vector_search': 'on'}
 
 - `echo/memory/tier1_hierarchical.py`、`tier2_beam.py` 是改过底层的实现：摘要分层、下钻预算、Mnemosyne 适配与中文长问句的词法门控补偿都在这里；
 - `vendor/mnemosyne` 是 Mnemosyne 3.10.0 的本地修改版（含 beam/recall/facts 抽取的补丁）。`echo/__init__.py` 会把 `vendor/` 插到 `sys.path` 最前面，所以**不要**再 `pip install mnemosyne-memory`，以免装回原版覆盖修改。
-
-## 评测
-
-开发集评测（Bench 2.2，短对话 809 题 + 自然用记忆榜）在本仓库发布时跑过一轮，结果与成本记录在 `RESULTS.md`。
